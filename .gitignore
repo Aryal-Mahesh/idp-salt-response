@@ -1,0 +1,17 @@
+# bulk simulation outputs — archived to Zenodo, not git
+sweep/sims/
+sweep/data/
+sweep/logs/
+logs/
+# external data
+library/_2023_Tesei_IDRome-5/
+library/_2023_Tesei_IDRome-5.zip
+# python/editor cruft
+__pycache__/
+*.pyc
+*.bak
+.DS_Store
+# trajectories
+*.dcd
+*.xtc
+*.h5

@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -q gpus
+#PBS -N calvados_full
+#PBS -l select=1:mem=8gb:ncpus=2:ngpus=1
+#PBS -l walltime=02:00:00
+#PBS -j oe
+#PBS -W group_list=YOUR_ALLOCATION        # <-- set to your PBS allocation/group
+#PBS -J 1-2555%50
+#PBS -o logs/
+
+# Submitted in three waves (1-900, 901-1800, 1801-2555) on the original
+# cluster due to a 1000-job queued limit; adjust the -J range above to suit
+# your scheduler, or submit the full 1-2555 range if your queue allows.
+
+module purge
+module load cuda11.8/toolkit/11.8.0          # <-- match your cluster's CUDA module
+source "$(conda info --base)/etc/profile.d/conda.sh"   # generic conda init
+conda activate idp-salt
+
+cd $PBS_O_WORKDIR
+
+LINE_NUM=$((PBS_ARRAY_INDEX + 1))
+JOB_LINE=$(sed -n "${LINE_NUM}p" jobs.csv)
+SEQ_ID=$(echo $JOB_LINE | cut -d, -f1)
+SALT=$(echo $JOB_LINE | cut -d, -f2)
+SALT_MM=$(python -c "print(int($SALT*1000))")
+SYSNAME="${SEQ_ID}_salt$(printf '%03d' $SALT_MM)mM"
+
+# Idempotent: skip if already done
+if [ -f "data/${SYSNAME}/conf_prop.csv" ]; then
+    echo "Task ${PBS_ARRAY_INDEX}: ${SYSNAME} already done, skipping."
+    exit 0
+fi
+
+# Defensive: catch missing prepare
+if [ ! -f "sims/${SYSNAME}/run.py" ]; then
+    echo "ERROR: sims/${SYSNAME}/run.py not found - was prepare_all.py run?"
+    exit 1
+fi
+
+echo "Task ${PBS_ARRAY_INDEX}: ${SYSNAME} on $(hostname) GPU=${CUDA_VISIBLE_DEVICES:-?}"
+python sims/${SYSNAME}/run.py --path sims/${SYSNAME}
+EXIT_CODE=$?
+
+if [ -f "data/${SYSNAME}/conf_prop.csv" ]; then
+    echo "Finished ${SYSNAME}: $(date) [exit=${EXIT_CODE}]"
+else
+    echo "INCOMPLETE ${SYSNAME}: $(date) [exit=${EXIT_CODE}] - no conf_prop.csv produced"
+    exit 1
+fi
