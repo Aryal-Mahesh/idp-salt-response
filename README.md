@@ -5,7 +5,7 @@ disordered protein (IDP) conformational ensembles respond to monovalent salt,
 built on a 511-sequence library and 2,555 CALVADOS-2 coarse-grained simulations.
 
 The central result: the length-weighted sequence charge decoration, **SCD x N**,
-is the dominant coordinate organizing salt response -- it accounts for roughly
+is the dominant coordinate organizing salt response,it accounts for roughly
 40% of total SHAP feature attribution and exceeds the next feature threefold,
 with a sigmoidal dependence whose sign sets the *direction* of response and whose
 magnitude sets the *strength*.
