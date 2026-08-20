@@ -15,7 +15,6 @@ os.makedirs('plots', exist_ok=True)
 df = pd.read_csv('library.csv')
 print(f"Loaded {len(df)} sequences")
 
-# Color/marker by subset
 SUBSET_STYLE = {
     'kappa_variant':     dict(color='#1f77b4', marker='o', label='κ-variants (synthetic)'),
     'ncpr_series':       dict(color='#ff7f0e', marker='s', label='NCPR series (synthetic)'),
@@ -31,7 +30,7 @@ def scatter_by_subset(ax, df, x_col, y_col, alpha=0.7, size=30):
                    s=size, alpha=alpha, edgecolors='none',
                    label=f"{style['label']} (n={len(sub)})")
 
-# ----- Figure 1: NCPR vs FCR -----
+# ----- Figure 1: NCPR vs FCR -----#
 fig, ax = plt.subplots(figsize=(7, 6))
 scatter_by_subset(ax, df, 'ncpr', 'fcr')
 
@@ -54,7 +53,7 @@ plt.savefig('plots/01_ncpr_fcr_coverage.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Saved plots/01_ncpr_fcr_coverage.png")
 
-# ----- Figure 2: SCD vs length -----
+# ----- Figure 2: SCD vs length -----#
 fig, ax = plt.subplots(figsize=(7, 6))
 scatter_by_subset(ax, df, 'scd', 'length')
 ax.set_xlabel('SCD (sequence charge decoration)', fontsize=11)
@@ -68,7 +67,7 @@ plt.savefig('plots/02_scd_length_coverage.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Saved plots/02_scd_length_coverage.png")
 
-# ----- Figure 3: kappa vs FCR (synthetic-only focus on patterning axis) -----
+# ----- Figure 3: kappa vs FCR (synthetic-only focus on patterning axis) -----#
 fig, ax = plt.subplots(figsize=(7, 6))
 df_with_kappa = df.dropna(subset=['kappa'])
 scatter_by_subset(ax, df_with_kappa, 'kappa', 'fcr')
@@ -82,7 +81,7 @@ plt.savefig('plots/03_kappa_fcr_coverage.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Saved plots/03_kappa_fcr_coverage.png")
 
-# ----- Summary -----
+# ----- Summary -----#
 print("\nLibrary coverage summary:")
 print(f"  NCPR: {df['ncpr'].min():.2f} to {df['ncpr'].max():.2f}")
 print(f"  FCR:  {df['fcr'].min():.2f} to {df['fcr'].max():.2f}")
