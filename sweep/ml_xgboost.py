@@ -99,7 +99,7 @@ def main():
     
     print(f"Loaded {len(df)} sequences, {X.shape[1]} features")
     
-    # === Random 5-fold CV ===
+    # === Random 5-fold CV ===#
     print("\n=== RANDOM 5-FOLD CV ===")
     print("(interpolation regime — charitable)")
     
@@ -117,7 +117,7 @@ def main():
     cmp.columns = ['regime', 'n', 'R²_ridge', 'MAE_ridge', 'R²_xgb', 'MAE_xgb']
     print(cmp.round(3).to_string(index=False))
     
-    # === Leave-one-subset-out CV ===
+    # === Leave-one-subset-out CV ===#
     print("\n=== LEAVE-ONE-SUBSET-OUT CV ===")
     print("(generalization stress test)")
     
@@ -131,15 +131,15 @@ def main():
     print(f"    Ridge:   {loso_ridge['r2'].mean():.3f}")
     print(f"    XGBoost: {loso_xgb['r2'].mean():.3f}")
     
-    # === Verdict ===
+    # === Verdict ===#
     print("\n=== VERDICT ===")
     
-    # Did worst regime improve?
+    # Did worst regime improve?#
     worst_ridge_random = pr_ridge['r2'].min()
     worst_xgb_random   = pr_xgb['r2'].min()
     print(f"  Worst-regime R² (random CV): Ridge={worst_ridge_random:.3f}, XGBoost={worst_xgb_random:.3f}")
     
-    # Did best regime drop?
+    # Did best regime drop?#
     best_ridge_random = pr_ridge['r2'].max()
     best_xgb_random   = pr_xgb['r2'].max()
     print(f"  Best-regime R²  (random CV): Ridge={best_ridge_random:.3f}, XGBoost={best_xgb_random:.3f}")
@@ -151,7 +151,7 @@ def main():
     else:
         print("  → XGBoost doesn't meaningfully beat ridge. Physics features carry the signal.")
     
-    # Save predictions for later analysis
+    # Save predictions for later analysis#
     df['ridge_pred_slope'] = preds_ridge
     df['xgb_pred_slope'] = preds_xgb
     df['ridge_pred_slope_loso'] = preds_ridge_loso
