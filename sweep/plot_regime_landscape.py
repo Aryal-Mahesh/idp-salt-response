@@ -15,7 +15,7 @@ REGIME_ORDER = ['PE_contraction', 'PA_swelling', 'non_monotonic', 'salt_insensit
 def pretty(regime):
     return regime.replace('_', ' ')
 
-# ----- Plot 1: NCPR vs FCR colored by regime -----
+# ----- Plot 1: NCPR vs FCR colored by regime -----#
 fig, ax = plt.subplots(figsize=(8, 6.5))
 for regime in REGIME_ORDER:
     sub = m[m['regime'] == regime]
@@ -34,7 +34,7 @@ plt.savefig('plots/regime_landscape_ncpr_fcr.png', dpi=150, bbox_inches='tight')
 plt.close()
 print("Wrote plots/regime_landscape_ncpr_fcr.png")
 
-# ----- Plot 2: SCD vs Length colored by regime -----
+# ----- Plot 2: SCD vs Length colored by regime -----#
 fig, ax = plt.subplots(figsize=(8, 6.5))
 for regime in REGIME_ORDER:
     sub = m[m['regime'] == regime]
@@ -53,7 +53,7 @@ plt.savefig('plots/regime_landscape_scd_length.png', dpi=150, bbox_inches='tight
 plt.close()
 print("Wrote plots/regime_landscape_scd_length.png")
 
-# ----- Plot 3: Rg slope distribution by regime -----
+# ----- Plot 3: Rg slope distribution by regime -----#
 fig, ax = plt.subplots(figsize=(8, 5))
 for regime in REGIME_ORDER:
     sub = m[m['regime'] == regime]
@@ -71,7 +71,7 @@ plt.savefig('plots/slope_distribution_by_regime.png', dpi=150, bbox_inches='tigh
 plt.close()
 print("Wrote plots/slope_distribution_by_regime.png")
 
-# ----- Plot 4: Representative Rg vs salt curves -----
+# ----- Plot 4: Representative Rg vs salt curves -----#
 SALTS_MM = [50, 100, 150, 300, 500]
 fig, axes = plt.subplots(1, 4, figsize=(16, 4), sharey=False)
 for ax, regime in zip(axes, REGIME_ORDER):
