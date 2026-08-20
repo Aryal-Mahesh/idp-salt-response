@@ -1,5 +1,5 @@
 """
-Hero figure: predicted vs actual Rg slope, comparing ridge baseline to XGBoost.
+Predicted vs actual Rg slope, comparing ridge baseline to XGBoost.
 Both panels show in-distribution (random CV) predictions colored by regime.
 """
 import pandas as pd
