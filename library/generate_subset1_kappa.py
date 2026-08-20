@@ -13,7 +13,7 @@ LENGTHS = [50, 100, 200]
 FCRS = [0.30, 0.50]
 KAPPA_TARGETS = np.round(np.arange(0.05, 0.56, 0.05), 2)  # 0.05, 0.10, ..., 0.55
 N_PER_BIN = 3
-KAPPA_TOLERANCE = 0.04   # slightly looser than before
+KAPPA_TOLERANCE = 0.04   
 MAX_ATTEMPTS_PER_CELL = 4000
 
 FILLERS = list('GSAP')
