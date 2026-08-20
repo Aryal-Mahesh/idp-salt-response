@@ -1,6 +1,5 @@
-"""Regime classifier — verbose version with thread limits."""
+"""Regime classifier."""
 import os
-# Limit threads BEFORE importing anything else to avoid login-node contention
 os.environ["OMP_NUM_THREADS"] = "2"
 os.environ["OPENBLAS_NUM_THREADS"] = "2"
 os.environ["MKL_NUM_THREADS"] = "2"
@@ -10,7 +9,7 @@ print("Starting imports...", flush=True)
 import numpy as np
 import pandas as pd
 import matplotlib
-matplotlib.use("Agg")  # no display needed
+matplotlib.use("Agg")  
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -39,7 +38,7 @@ print(f"  Classes: {class_names}", flush=True)
 for i, c in enumerate(class_names):
     print(f"  {c}: {(y == i).sum()}", flush=True)
 
-# === Logistic regression (random CV) ===
+# === Logistic regression (random CV) ===#
 print("\nLogistic regression — random CV...", flush=True)
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=RNG_SEED)
 preds_log = np.zeros_like(y)
@@ -55,7 +54,7 @@ for fold, (tr, te) in enumerate(skf.split(X, y)):
     fold_acc_log.append(accuracy_score(y[te], preds_log[te]))
 print(f"  Logistic mean accuracy: {np.mean(fold_acc_log):.3f}", flush=True)
 
-# === XGBoost classifier (random CV) ===
+# === XGBoost classifier (random CV) ===#
 print("\nXGBoost — random CV...", flush=True)
 preds_xgb = np.zeros_like(y)
 fold_acc_xgb = []
@@ -75,7 +74,7 @@ for fold, (tr, te) in enumerate(skf.split(X, y)):
     print(f"  fold {fold+1}/5 — done (acc={fold_acc_xgb[-1]:.3f})", flush=True)
 print(f"  XGBoost mean accuracy: {np.mean(fold_acc_xgb):.3f}", flush=True)
 
-# === Reports ===
+# === Reports ===#
 print("\n--- XGBoost classification report ---", flush=True)
 print(classification_report(y, preds_xgb, target_names=class_names, zero_division=0))
 
@@ -83,14 +82,14 @@ cm = confusion_matrix(y, preds_xgb)
 print("Confusion matrix:")
 print(pd.DataFrame(cm, index=class_names, columns=class_names))
 
-# === Save ===
+# === Save ===#
 df_out = df[['seq_id', 'subset', 'regime']].copy()
 df_out['regime_pred_logistic'] = le.inverse_transform(preds_log)
 df_out['regime_pred_xgb'] = le.inverse_transform(preds_xgb)
 df_out.to_csv('regime_classifier_predictions.csv', index=False)
 print("\nWrote regime_classifier_predictions.csv", flush=True)
 
-# Confusion matrix plot
+# Confusion matrix plot#
 fig, ax = plt.subplots(figsize=(7, 6))
 im = ax.imshow(cm, cmap='Blues', aspect='auto')
 ax.set_xticks(range(len(class_names))); ax.set_xticklabels(class_names_pretty, rotation=30, ha='right')
