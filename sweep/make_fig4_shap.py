@@ -19,7 +19,7 @@ from xgboost import XGBRegressor
 
 from physics_baseline import build_features, RNG_SEED
 
-# ---- nicer display names for features (keys must match build_features columns) ----
+
 PRETTY = {
     'scd_length':      r'$\mathrm{SCD}\times N$',
     'scd':             r'$\mathrm{SCD}$',
