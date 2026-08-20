@@ -1,7 +1,7 @@
 """
 make_fig4_shap.py
 Combine the SHAP dependence (top-3 features) and per-regime importance into a
-single two-panel publication figure: plots/fig4_shap.png
+a figure: plots/fig4_shap.png
 
 Reproduces the exact pipeline from shap_analysis.py (same features, same model,
 same seed) so the SHAP values match the existing standalone plots.
