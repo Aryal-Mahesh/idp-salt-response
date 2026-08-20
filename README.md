@@ -61,7 +61,7 @@ This repository accompanies the manuscript (preprint link to be added).
 Note: the figure scripts read their inputs (`master_table.csv`,
 `ml_predictions.csv`) by relative path and write to `plots/`, so run them from
 inside `sweep/`. `physics_baseline.py` defines the eight features via
-`build_features()` and is imported by every other ML script -- it is the single
+`build_features()` and is imported by every other ML script, it is the single
 source of truth for the feature set.
 
 ---
