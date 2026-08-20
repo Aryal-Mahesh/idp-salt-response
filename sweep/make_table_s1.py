@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Generate Supplementary Table S1: per-subset descriptor ranges.
-Run on the cluster from the sweep/ directory: python make_table_s1.py
+python make_table_s1.py
 """
 import pandas as pd
 
 df = pd.read_csv("master_table.csv")
 
-# --- column name resolution (edit here if auto-detect picks wrong) ---
 def pick(df, *candidates):
     for c in candidates:
         if c in df.columns:
@@ -20,7 +19,6 @@ col_ncpr   = pick(df, "ncpr", "NCPR")
 col_kappa  = pick(df, "kappa", "Kappa")
 col_scd    = pick(df, "scd", "SCD")
 
-# --- pretty subset names + display order ---
 name_map = {
     "kappa_variant":   r"$\kappa$-variants",
     "ncpr_series":     "NCPR series",
@@ -54,7 +52,6 @@ rows.append([
     rng(df[col_ncpr]), rng(df[col_kappa]), rng(df[col_scd]),
 ])
 
-# --- emit LaTeX ---
 print(r"\begin{table}[t]")
 print(r"\centering")
 print(r"\caption{Composition and charge-patterning ranges of the four "
