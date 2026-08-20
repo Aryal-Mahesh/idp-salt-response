@@ -66,7 +66,7 @@ def main():
     rng = np.random.default_rng(RNG_SEED)
     df = load_idrome()
     
-    # ----- Subset 3: stratified by (SCD, length) -----
+    # ----- Subset 3: stratified by (SCD, length) -----#
     print("\n--- Subset 3: stratified by (SCD, length) ---")
     s3 = stratified_sample(df, 'scd', 'N', N_SCD_BINS, N_LEN_BINS,
                             N_PER_CELL_SUBSET3, rng)
@@ -94,7 +94,7 @@ def main():
     s4.to_csv('subset4_idrome_lowfcr.csv', index=False)
     print(f"Wrote subset4_idrome_lowfcr.csv")
     
-    # ----- Quick summary -----
+    # ----- Quick summary -----#
     print("\n--- Summary ---")
     print(f"Subset 3: {len(s3)} sequences")
     print(f"  Length range: {s3['N'].min()}-{s3['N'].max()}, median {s3['N'].median():.0f}")
