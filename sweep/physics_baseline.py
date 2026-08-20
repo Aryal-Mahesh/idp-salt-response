@@ -2,7 +2,7 @@
 Physics-motivated linear baseline for predicting dRg/d[salt].
 
 Idea: design polymer-physics features from established theory (Lin/Chan, Ghosh,
-Pappu), fit ridge regression. This is the baseline ML must beat to claim added value.
+Pappu), fit ridge regression.
 
 Features used (with theoretical motivation):
   - NCPR^2 * length      Polyelectrolyte contraction strength (Higgs-Joanny scaling)
@@ -92,7 +92,7 @@ def main():
     
     df['physics_pred_slope'] = preds
     
-    # Fit on all data to get final coefficients for the paper
+    # Fit on all data to get final coefficients 
     scaler = StandardScaler()
     X_all = scaler.fit_transform(X)
     final_model = Ridge(alpha=1.0, random_state=RNG_SEED)
