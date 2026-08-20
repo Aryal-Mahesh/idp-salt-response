@@ -16,8 +16,7 @@ from matplotlib.gridspec import GridSpec
 import shap
 from xgboost import XGBRegressor
 
-# Import the EXACT feature builder and seed used everywhere else in the project,
-# so this figure cannot diverge from the trained model / reported numbers.
+
 from physics_baseline import build_features, RNG_SEED
 
 # ---- nicer display names for features (keys must match build_features columns) ----
